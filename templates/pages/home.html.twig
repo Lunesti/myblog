@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Blog écrivain'%}
+
+{% block body  %}
+
+	{{ include('pages/_header.html.twig') }}
+	{{ include('pages/_banner.html.twig') }}
+	<div class='row justify-content-center'>
+		<div class="col-md-6">
+			<section class='posts' style='background:#FFF;'>
+
+				<h2 class='text-center py-5'>Billet simple pour l'Alaska</h2>
+
+				<div class="jumbotron">
+					<article>
+
+						{% for post in posts %}
+							<h5 class='mb-0 pb-0'>
+								<a class='text-decoration-none'>
+									{{ post.title }}</a>, le
+								{{post.createdAt }}
+
+							</h5>
+							<hr class='bg-dark mt-1'>
+
+
+							<p>{{ post.content | striptags | slice(0, 300) }}
+								[...]</p>
+                                {% endfor %}
+						</article>
+					</div>
+
+
+					{{ include('pages/_footer.html.twig') }}
+				</section>
+			</div>
+		</div>
+	{% endblock %}

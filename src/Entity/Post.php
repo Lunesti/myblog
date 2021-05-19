@@ -41,6 +41,7 @@ class Post
 
     public function __construct()
     {
+        $this->created_at = new \DateTime();
         $this->comments = new ArrayCollection();
     }
 
@@ -73,9 +74,9 @@ class Post
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt($format = 'Y-m-d H:i:s')
     {
-        return $this->created_at;
+        return $this->created_at->format($format);
     }
 
     public function setCreatedAt(\DateTimeInterface $created_at): self

@@ -1,0 +1,33 @@
+<div class='row justify-content-center'>
+
+	<div class="col-md-6">
+
+		<section class='introduction text-center d-flex flex-column justify-content-center bg-light'>
+			<p>
+				{% for message in app.flashes('newuser') %}
+
+					<div class="alert alert-success">
+						{{message}}</div>
+
+				{% endfor %}
+			</p>
+			<p>
+				{% for message in app.flashes('user') %}
+
+					<div class="alert alert-success">
+						{{message}}
+						{{app.user.pseudo}}</div>
+
+				{% endfor %}
+			</p>
+			<h1 class='pt-5'>Bienvenue sur mon blog !</h1>
+			<p class='py-4'>Bienvenue, je publierais régulièrement chacun des chapitres de mon nouveau roman "Billet simple pour l'Alaska".
+						N'hésitez-pas à commenter en partagant vos avis et ressentie.
+						Je vous souhaites une bonne lecture et une bonne découverte de chacune des aventures de mon merveilleux roman.<br>
+				Jean FORTEROCHE</p>
+		</section>
+		<div class="banner" style='background:#FFF;'>
+			<img src="{{ asset('img/banniere.jpg') }}" class="img-fluid" alt="Responsive image">
+		</div>
+	</div>
+</div>

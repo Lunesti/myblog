@@ -30,14 +30,15 @@ class AdminController extends AbstractController
      */
     public function create(Request $request): Response
     {
-        $posts = new Post();
+        $post = new Post();
 
-        $form = $this->createForm(PostType::class, $posts);
+        $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($posts);
+            
+            $this->em->persist($post);
             $this->em->flush();
             $this->addFlash('success', 'Article ajouté avec succès');
 
