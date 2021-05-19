@@ -8,14 +8,14 @@
 			<div class='row justify-content-center'>
 				<div class="col-md-6">
 					<section class="inscription bg-light ">
-						<h2 class='py-5 text-center'>Connexion à votre espace</h2>
+						<h2 class='py-5 text-center'>Espace administrateur</h2>
 						<div class="container">
 							<form method="post" class="d-flex flex-column align-items-center">
 								{% if error %}
 									<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 								{% endif %}
 								<label for="inputUsername">Username</label>
-								<input type="username" value="{{ last_username }}" name="username" id="inputUsername" class="form-control w-50" autocomplete="username" required autofocus>
+								<input type="email" value="{{ last_username }}" name="email" id="inputUsername" class="form-control w-50" autocomplete="email" required autofocus>
 								<label for="inputPassword">Password</label>
 								<input type="password" name="password" id="inputPassword" class="form-control w-50" autocomplete="current-password" required>
 
@@ -36,3 +36,4 @@
 
 	</form>
 {% endblock %}
+© 2021 GitHub, Inc.

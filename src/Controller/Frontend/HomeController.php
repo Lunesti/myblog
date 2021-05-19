@@ -30,7 +30,7 @@ class HomeController extends AbstractController
 
     /**
      * index
-     * @Route("/posts", name="posts")
+     * @Route("/", name="posts")
      *
      * @return Response
      */
@@ -39,6 +39,7 @@ class HomeController extends AbstractController
 
         return new Response($this->render('pages/home.html.twig', [
             'posts' => $this->postRepository->findAll(),
+            'current_menu' => 'posts',
         ]));
     }
 
@@ -88,7 +89,7 @@ class HomeController extends AbstractController
         //on va chercher dans le répo de la class Post l'id correspondant au post,
         $post = $this->em->getRepository(Post::class)->findOneBy(['id' => $post]);
         //ensuite on récupère l'id du post dans le repo de comment
-       /*$comments = $this->em->getRepository(Comment::class)->findBy([
+        /*$comments = $this->em->getRepository(Comment::class)->findBy([
             'post' => $post
         ], [
             'created_at' => 'desc'
@@ -96,7 +97,10 @@ class HomeController extends AbstractController
 
         $comments = $paginator->paginate(
             $this->commentRepository->findBy([
-                'post' => $post]),
+                'post' => $post
+            ], [
+                'created_at' => 'desc'
+            ]),
             $request->query->get('page', 1),
             6
         );

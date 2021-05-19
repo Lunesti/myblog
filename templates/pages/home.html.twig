@@ -32,19 +32,24 @@
 
 
 							<p>{{ post.content | striptags | slice(0, 300) }}
-								[...]</p>
+								[...]<span>
+									<a href="{{path('post.show', {id: post.id, slug:post.slug})}}" class='text-decoration-none'>Lire la suite</a>
+								</span>
+							</p>
 
 							{% if app.user.roles is defined and app.user.roles == ['ROLE_ADMIN'] %}
+
+								<button class='btn btn-primary mb-3'>
+									<a class='text-white' href="{{path('admin.post.edit', {id:post.id})}}">Editer</a>
+								</button>
+
 								<form method="post" action="{{path('admin.post.delete', {id:post.id})}}" style="display:inline-block" onsubmit="return confirm('Etes vous vraiment sûr ?')">
 									<input type="hidden" name="_method" value="DELETE">
 									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
-									<button class="btn btn-danger">Supprimer</button>
+									<button class="btn btn-danger mb-3">Supprimer</button>
 								</form>
 
 							{% endif %}
-							<p class=' pb-1'>
-								<a href="{{path('post.show', {id: post.id, slug:post.slug})}}" class='text-decoration-none'>Lire la suite</a>
-							</p>
 						{% endfor %}
 
 					</article>

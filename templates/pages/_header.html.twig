@@ -6,13 +6,13 @@
 
 	<div class='row justify-content-center'>
 		<div class="col-md-6">
-			<nav class="navbar bg-dark navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+			<nav class="navbar bg-dark navbar-expand-lg navbar-light bg-light d-flex justify-content-between py-4">
 				<a class="navbar-brand text-white" href="#">Jean Forteroche</a>
 
 				<ul class="navbar-nav d-flex justify-content-between">
-					<li class="nav-item active">
-						<a class="nav-link text-white " href="{{path('posts')}}">Accueil
-							<span class="sr-only">(current)</span>
+					<li class="nav-item">
+				<a class="nav-link text-white " href="{{ path('posts') }}">Accueil</a>
+						
 						</a>
 					</li>
 
@@ -25,10 +25,12 @@
 
 				{% else %}
 					<li class="nav-item">
-						<a class="nav-link text-white" href="{{path('login')}}">Connexion</a>
+						<a class="nav-link text-white " href="{{ path('login') }}">Connexion</a>
 					</li>
 				{% endif %}
 			</ul>
 		</nav>
 	</div>
-</div>{% endblock %}
+</div>
+
+{% endblock %}
