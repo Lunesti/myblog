@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,6 +51,11 @@ class Post
         return $this->id;
     }
 
+    public function getSlug():string
+    {
+        return (new Slugify())->slugify($this->title);
+    }
+
     public function getTitle(): ?string
     {
         return $this->title;
@@ -64,7 +70,7 @@ class Post
 
     public function getContent(): ?string
     {
-        return $this->content;
+        return (string) $this->content;
     }
 
     public function setContent(string $content): self
@@ -74,7 +80,7 @@ class Post
         return $this;
     }
 
-    public function getCreatedAt($format = 'Y-m-d H:i:s')
+    public function getCreatedAt($format = 'd/m/Y')
     {
         return $this->created_at->format($format);
     }

@@ -15,6 +15,12 @@
 				<div class="jumbotron">
 					<article>
 
+						{% if app.user.roles is defined and app.user.roles == ['ROLE_ADMIN'] %}
+							<p class="display-4 initialism pb-5 text-info">
+								<a href="{{path('admin.post.create')}}">Créer un nouvel article</a>
+							</p>
+						{% endif %}
+
 						{% for post in posts %}
 							<h5 class='mb-0 pb-0'>
 								<a class='text-decoration-none'>
@@ -27,13 +33,26 @@
 
 							<p>{{ post.content | striptags | slice(0, 300) }}
 								[...]</p>
-                                {% endfor %}
-						</article>
-					</div>
+
+							{% if app.user.roles is defined and app.user.roles == ['ROLE_ADMIN'] %}
+								<form method="post" action="{{path('admin.post.delete', {id:post.id})}}" style="display:inline-block" onsubmit="return confirm('Etes vous vraiment sûr ?')">
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+									<button class="btn btn-danger">Supprimer</button>
+								</form>
+
+							{% endif %}
+							<p class=' pb-1'>
+								<a href="{{path('post.show', {id: post.id, slug:post.slug})}}" class='text-decoration-none'>Lire la suite</a>
+							</p>
+						{% endfor %}
+
+					</article>
+				</div>
 
 
-					{{ include('pages/_footer.html.twig') }}
-				</section>
-			</div>
+				{{ include('pages/_footer.html.twig') }}
+			</section>
 		</div>
-	{% endblock %}
+	</div>
+{% endblock %}

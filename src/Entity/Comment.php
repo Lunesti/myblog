@@ -40,7 +40,7 @@ class Comment
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
+        $this->created_at = new \DateTime();
     }
 
     public function getId(): ?int
@@ -72,9 +72,9 @@ class Comment
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt($format = 'd/m/Y')
     {
-        return $this->created_at;
+        return $this->created_at->format($format);
     }
 
     public function setCreatedAt(\DateTimeInterface $created_at): self

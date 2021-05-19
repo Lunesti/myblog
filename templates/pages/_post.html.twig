@@ -1,7 +1,85 @@
 {% extends 'base.html.twig' %}
 
+{% block title 'Blog écrivain'%}
+
 {% block body %}
-	<footer class="col-md-12 pt-5 bg-light">
-		<p class='mt-0 text-center'>Tous droits réservés © Arben PEPOSI 2021 </p>
-	</footer>
-{% endblock %}
+	{{ include('pages/_header.html.twig') }}
+	{{ include('pages/_banner.html.twig') }}
+	<div class='row justify-content-center'>
+
+		<div class="col-md-6">
+			<section class='introduction bg-white px-4'>
+				<h2 class='text-center py-5'>Billet simple pour l'Alaska</h2>
+				<p class='pb-4'>
+					<a class='text-info' href="{{path('posts')}}">Retour à la liste des billets</a>
+				</p>
+				<article>
+					<h3 class='pb-3'>
+						{{ post.title }}, le :
+						{{post.createdAt }}
+					</h3>
+					<p>{{ post.content }}
+					</p>
+
+				</article>
+
+				<h2 class='text-center py-5'>Commentaires</h2>
+
+				<!-- Si un user est connecté, il peut laisser un commentaire -->
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					<!--On affiche le champs commentaire-->
+					{{ form_start(form, {'attr': {'class': 'col-md-8 px-0' }}) }}
+					<p>
+						Connecté en tant que
+						{{ app.user.username }}
+					</p>
+					<p>
+						{{ form_widget(form.comment, {'attr': {'class': 'form-control' }}) }}
+					</p>
+					<button class="btn btn-primary mt-2" type="submit">
+						Envoyer
+					</button>
+					{{ form_end(form) }}
+
+
+					<!-- Sinon on propose à l'user de se connecter ou de s'inscrire-->
+				{% else %}
+					<p class="alert-danger pb-3 text-center">
+						Veuillez vous
+						<a class="alert-danger text-info" href="{{ path('login') }}">
+							connecter
+						</a>
+						ou vous
+						<a class="alert-danger text-info" href="{{ path('registration') }}">
+							inscrire
+						</a>
+						pour rédiger un commentaire</p>
+					{{ form_widget(form, { 'attr': {'style':'display:none'} }) }}
+				{% endif %}
+
+				<!-- On récupère les commentaires écrits-->
+
+				{% for commentView in comment %}
+
+					<p class="comment-writed-by">Commentaire écrit par
+						<span class="font-weight-bold">{{ commentView.author }}</span>, le
+						{{ commentView.createdAt }}</p>
+					<p>
+						{{ commentView.comment }}
+					</p>
+
+					<!-- Sinon on propose de laisser un premier commentaire sur l'article-->
+				{% else %}
+					<p>Il n'y a pas de commentaires, publier le premier !</p>
+				{% endfor %}
+				<div class="pagination">
+				{{ knp_pagination_render(comment) }}
+			</div>
+			{{ include('pages/_footer.html.twig') }}
+			</section>
+
+		</div>
+
+	</div>
+
+</div>{% endblock %}

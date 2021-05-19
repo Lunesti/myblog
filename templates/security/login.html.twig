@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Blog écrivain'%}
+
+	{% block body %}
+		{{ include('pages/_header.html.twig') }}
+		<div class="form-group">
+			<div class='row justify-content-center'>
+				<div class="col-md-6">
+					<section class="inscription bg-light ">
+						<h2 class='py-5 text-center'>Espace administrateur</h2>
+						<div class="container">
+							<form method="post" class="d-flex flex-column align-items-center">
+								{% if error %}
+									<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+								{% endif %}
+								<label for="inputUsername">Username</label>
+								<input type="username" value="{{ last_username }}" name="username" id="inputUsername" class="form-control w-50" autocomplete="username" required autofocus>
+								<label for="inputPassword">Password</label>
+								<input type="password" name="password" id="inputPassword" class="form-control w-50" autocomplete="current-password" required>
+
+								<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+								<button class="btn btn-primary w-25 my-4" type="submit">
+									Sign in
+								</button>
+							</form>
+							<p class='text-center pb-4'>Pas encore inscrit ? Veuillez vous inscrire
+								<a href="{{path('registration')}}">ici</a>
+							</p>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+
+
+	</form>
+{% endblock %}

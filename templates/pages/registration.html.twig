@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Blog écrivain'%}
+
+{% block body %}
+
+{{ include('pages/_header.html.twig') }}
+<div class="form-group">
+	<div class='row justify-content-center'>
+		<div class="col-md-6">
+			<section class="inscription bg-light ">
+				<h2 class='py-5 text-center'>Inscription</h2>
+				<div class="container">
+					{{ form_start(form, { 'attr': {'class': 'd-flex flex-column align-items-center'}}) }}
+					{{form_label(form.username)}}
+					{{form_widget(form.username, { 'attr': {'class': 'form-control w-50'}}) }}
+					{{form_label(form.email)}}
+					{{form_widget(form.email, { 'attr': {'class': 'form-control w-50'}}) }}
+
+					{{form_label(form.password.first)}}
+					{{ form_widget(form.password.first, { 'attr': {'class': 'form-control w-50'}}) }}
+					{{form_label(form.password.second)}}
+					{{ form_widget(form.password.second, { 'attr': {'class': 'form-control w-50'}}) }}
+					<button class="btn btn-primary w-25 my-4">
+						{{button|default('S\'inscrire')}}
+						</button>
+				</div>
+			</section>
+
+			{{form_end(form)}}
+		</div>
+	</div>
+{% endblock %}

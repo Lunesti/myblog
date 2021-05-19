@@ -11,7 +11,7 @@
 
 				<ul class="navbar-nav d-flex justify-content-between">
 					<li class="nav-item active">
-						<a class="nav-link text-white " href="#">Accueil
+						<a class="nav-link text-white " href="{{path('posts')}}">Accueil
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
@@ -19,13 +19,13 @@
 					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
 						<li class="nav-item">
-							<a class='nav-link text-white' href="#">Se déconnecter</a>
+							<a class='nav-link text-white' href="{{path('app_logout')}}">Se déconnecter</a>
 						</li>
 					</div>
 
 				{% else %}
 					<li class="nav-item">
-						<a class="nav-link text-white" href="#">Connexion</a>
+						<a class="nav-link text-white" href="{{path('login')}}">Connexion</a>
 					</li>
 				{% endif %}
 			</ul>
